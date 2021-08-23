@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import com.example.demo.controller.ConstructorInjectedController;
+import com.example.demo.controller.I18nController;
 import com.example.demo.controller.MyController;
 import com.example.demo.controller.PropertyInjectedController;
 import org.springframework.boot.SpringApplication;
@@ -14,11 +15,15 @@ public class DemoApplication {
 
 		ApplicationContext ctx = SpringApplication.run(DemoApplication.class, args);
 
+
+		I18nController i18nController = (I18nController) ctx.getBean("i18nController");
+		System.out.println(i18nController.sayHello());
+
 		MyController myController = (MyController) ctx.getBean("myController");
 
-		String greeting = myController.sayHello();
+		System.out.println("----- Primary Bean");
 
-		System.out.println(greeting);
+		System.out.println(myController.sayHello());
 
 		ConstructorInjectedController constructorInjectedController = (ConstructorInjectedController) ctx.getBean("constructorInjectedController");
 		System.out.println(constructorInjectedController.getGreeting());
